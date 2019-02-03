@@ -2,7 +2,14 @@
 The objective of this project is to perform Sentiment analysis on Twitter dataset and find positive, negative and neutral tweets. We will use Hive and MapReduce along with AFINN-111 list to perform analysis.
 
 ## Table of contents:
-
+ - [Prerequisite](#prerequisite)
+ - [Steps](#steps)
+ - [Code](#code)
+ - [Execution](#execution)
+   - Exporting jars
+   - Distributed cache
+   - Starting hadoop services and checking
+   - Submitting MR job
 
 
 
