@@ -1,7 +1,13 @@
 # Twitter-Sentiment-Analysis
 The objective of this project is to perform Sentiment analysis on Twitter dataset and find positive, negative and neutral tweets. We will use Hive and MapReduce along with AFINN-111 list to perform analysis.
 
-### Prerequisites
+## Table of contents:
+
+
+
+
+
+### Prerequisite
 Any flavor of linux with following installed
   - Hadoop 2.x or above.
   - JDK 8
@@ -14,7 +20,7 @@ Any flavor of linux with following installed
   - Load this processed data into Hive and get positive , negative and neutral tweets.
   
   
-### Steps:
+### Code:
    - We will use third party API like simple json-simple-1.1.1 API along with Apache's StringUtils API to parse the data. 
       - [JSON Simple Example.](https://www.geeksforgeeks.org/parse-json-java/)
       - [StringUtils API](https://commons.apache.org/proper/commons-lang/apidocs/org/apache/commons/lang3/StringUtils.html#isNotBlank-java.lang.CharSequence-)
@@ -51,8 +57,10 @@ Any flavor of linux with following installed
 	
  	 }
    ```
-   </br>
-   - Inside *map method* we first try to find  Twitters **quoted_status** object to get text and id inside  it, if not found we find it normally.   [Twitter objects](https://twittercommunity.com/t/api-payloads-to-include-original-quoted-tweet-objects/38184)
+  
+  
+   
+  - Inside *map method* we first try to find  Twitters **quoted_status** object to get text and id inside  it, if not found we find it normally. [Twitter objects](https://twittercommunity.com/t/api-payloads-to-include-original-quoted-tweet-objects/38184)
    
    ```java
     if(object!=null && StringUtils.isNotBlank(String.valueOf(object)) )
@@ -134,7 +142,7 @@ else if(json.get("id")!=null && StringUtils.isNotBlank(String.valueOf(json.get("
    ```
    bin/hdfs dfs -cat core-site.xml
    ```
-   this will print the contents of the file core-site.xml which contains the configuration settings of Hadoop core.Here check the value of default fs. 
+   this will print the contents of the file core-site.xml which contains the configuration settings of Hadoop core.Here check the value of default fs(file system) this will give us the default hadoop url path.  In my case it's *hdfs://localhost:9000* , we use this path in driver program to add the folder */cache* containing  *AFINN-111.txt* into distributed cache 
    //add picture here
    
    
@@ -146,10 +154,14 @@ else if(json.get("id")!=null && StringUtils.isNotBlank(String.valueOf(json.get("
 ```
 jps
 ```
-- Submit the MapReduce job.
-```bin/yarn jar lt;jar file location ;gt  <Driver class name> <input-path>  <output-path> 
 
- bin/yarn  jar ../Desktop/sentiment.jar  Analyzer.Driver   /input  /output 
+////picture here.
+
+- Submit the MapReduce job.
+```
+** bin/yarn jar  jar_file_path  Full_Driver_class_name   input-path  output-path  ** 
+
+bin/yarn  jar ../Desktop/sentiment.jar  Analyzer.Driver   /input  /output 
  ```
 
 
