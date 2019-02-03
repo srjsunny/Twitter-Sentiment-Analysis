@@ -15,7 +15,7 @@ Any flavor of linux with following installed
   
   
 ### Steps:
-   - We will use simple json-simple-1.1.1 API along with Apache's StringUtils API to parse the data. 
+   - We will use third party API like simple json-simple-1.1.1 API along with Apache's StringUtils API to parse the data. 
       - [JSON Simple Example.](https://www.geeksforgeeks.org/parse-json-java/)
       - [StringUtils API](https://commons.apache.org/proper/commons-lang/apidocs/org/apache/commons/lang3/StringUtils.html#isNotBlank-java.lang.CharSequence-)
    - Add these external jars to you project. If you are using eclipse 
@@ -78,12 +78,9 @@ Any flavor of linux with following installed
 				 {
 					 sentiment_value += Long.parseLong(dictionary.get(temp));
 				 }
-		}
+		         }
+	}
 				
-	    }
-		
-		
-		
 	   
 else if(json.get("id")!=null && StringUtils.isNotBlank(String.valueOf(json.get("id")))
 &&  json.get("text")!=null && StringUtils.isNoneBlank(String.valueOf(json.get("Text")))  )
@@ -103,12 +100,7 @@ else if(json.get("id")!=null && StringUtils.isNotBlank(String.valueOf(json.get("
 				 {
 					 sentiment_value += Long.parseLong(dictionary.get(temp));
 				 }
-			 }
-			 
-			
-			
-			
-			
+			 }				
 		}
 			
    
@@ -116,17 +108,43 @@ else if(json.get("id")!=null && StringUtils.isNotBlank(String.valueOf(json.get("
   
   - Inside Driver we use **addCacheFile** to add our file in distributed cache.
   ```java
-  	          try{
-
+  	     try{
 			//adding file to distributed cache	
 			job.addCacheFile(new URI("hdfs://localhost:9000/cache/AFINN-111.txt"));
 		}catch(Exception e)
 		 {
-				System.out.println("file not added my dear");
+				System.out.println("file not added to cache my dear");
 				System.exit(1);
-			}
+		 }
   ```
       
+### Execution:
+- Exporting jars:
+  - Export the project we have made as a jar file. 
+    - Right click on project folder -> export -> as jar file.
+  - Go inside Hadoop_Home_directory and add the third party jars to the lib directory: **/share/common/hadoop/lib**.
+- Distributed cache:   
+  - Put  **AFINN-111.txt** file into HDFS from localfile system. 
+   ``` putting the file present in Desktop to cache folder present in HDFS
+   bin/hdfs dfs  -put   ../Desktop/AFINN-111.txt   /cache
+   ```
+   - Inside Hadoop_Home_directory go to hadoop directory: **/etc/hadoop** , then type 
+   ```
+   bin/hdfs dfs -cat core-site.xml
+   ```
+   this will print the contents of the file core-site.xml which contains the configuration settings of Hadoop core.Here check the value of default fs. 
+   //add picture here
+   
+   
+- Start the hadoop services
+ `sbin/start-all.sh`
 
+- Check services are running 
+`jps`
+- Submit the job.
+`bin/yarn jar <jar file location>  <Driver class name> <input-path>  <output-path> 
+
+ bin/yarn  jar ../Desktop/sentiment.jar  Analyzer.Driver   /input  /output 
+   
   
 
