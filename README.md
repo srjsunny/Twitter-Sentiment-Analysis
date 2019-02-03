@@ -15,12 +15,15 @@ Any flavor of linux with following installed
   
   
 ### Steps:
-   - We will use simple json-simple-1.1.1 API along with Apache's StringUtils API to parse the data.
+   - We will use simple json-simple-1.1.1 API along with Apache's StringUtils API to parse the data. 
+      - [JSON Simple Example.](https://www.geeksforgeeks.org/parse-json-java/)
+      - [StringUtils API](https://commons.apache.org/proper/commons-lang/apidocs/org/apache/commons/lang3/StringUtils.html#isNotBlank-java.lang.CharSequence-)
    - Add these external jars to you project. If you are using eclipse 
      - Right click on project -> build path -> configure build path -> libraries -> add external jars. 
-  /// your picture here.
+   /// your picture here.
+   - Inside setup method will read AFINN list stored in **distributed cache** and store the words as key and there number as value.
+  
    ```
-   
 	JSONParser parsing  = null;
 	
 	Map<String,String> dictionary = null;
@@ -33,9 +36,7 @@ Any flavor of linux with following installed
 		
 	  URI[] cacheFiles = context.getCacheFiles();
 	  if (cacheFiles != null && cacheFiles.length > 0)
-	  {
-	    try
-	    {   
+	  {  
 	    	String line ="";
 	        FileSystem fs = FileSystem.get(context.getConfiguration());
 	        Path path = new Path(cacheFiles[0].toString());
@@ -46,38 +47,15 @@ Any flavor of linux with following installed
 	        	String []tokens = line.split("\t");
 	        	dictionary.put(tokens[0], tokens[1]);
 	        }
-	    
-	    
-	    
-	    }catch(Exception e)
-	    {
-	    System.err.println("Unable to read the cached filed");
-	    System.exit(1);
-	    }
-	  }
-	}
 	
-	@Override
-	public void map(Object key, Text value, Context context)throws IOException,InterruptedException
-	{
-				
-	try {	
-		
-
-		JSONObject json = (JSONObject) parsing.parse(value.toString()); //this throws ParseException which has to handled
-		
-		JSONObject object = (JSONObject) json.get("quoted_status");
-		
-		String id="";
-		String processedTweet = "";
-		long sentiment_value=0;    
-		/* default sentiment value   Neutral = 0 
-		 *                          positive > 0
-		 *                          negative  < 0 
-		 */
-		
-		
-		if(object!=null && StringUtils.isNotBlank(String.valueOf(object)) )
+	 }
+      
+     
+     
+- Inside map method we will make use **quoted_text**
+     
+     ```
+    if(object!=null && StringUtils.isNotBlank(String.valueOf(object)) )
 		{
 			if(object.get("id")!=null && StringUtils.isNotBlank(String.valueOf(object.get("id")))    && object.get("text")!=null && StringUtils.isNotBlank(String.valueOf(object.get("text"))))
 			{
@@ -100,16 +78,13 @@ Any flavor of linux with following installed
 				 {
 					 sentiment_value += Long.parseLong(dictionary.get(temp));
 				 }
-			 }
-			 
-			
-			}
+		}
 				
 	    }
 		
 		
 		
-	
+	   
 		else if(json.get("id")!=null && StringUtils.isNotBlank(String.valueOf(json.get("id"))) &&  json.get("text")!=null && StringUtils.isNoneBlank(String.valueOf(json.get("Text")))  )
 		{
 			id = String.valueOf(json.get("id")).trim();
@@ -134,4 +109,6 @@ Any flavor of linux with following installed
 			
 			
 		}
-   ```
+			 
+      ```
+      
