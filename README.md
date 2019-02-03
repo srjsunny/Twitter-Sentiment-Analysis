@@ -21,9 +21,10 @@ Any flavor of linux with following installed
    - Add these external jars to you project. If you are using eclipse 
      - Right click on project -> build path -> configure build path -> libraries -> add external jars. 
    /// your picture here.
-   - Inside setup method will read AFINN list stored in **distributed cache** and store the words as key and there number as value.
+   - Inside *setup method* will read AFINN list stored in **distributed cache** and store the words as key and there number as value.We will make use of these values in *map method*
   
-   ``` java
+   ```java
+   
 	JSONParser parsing  = null;
 	
 	Map<String,String> dictionary = null;
@@ -49,10 +50,10 @@ Any flavor of linux with following installed
 	        }
 	
  	 }
-     ``` 
-     - Inside map method we will make use **quoted_text**
-     
-     ``` java
+   ```
+   - Inside *map method* we first try to find  Twitters **quoted_status** object to get text and id inside  it, if not found we find it normally.   [Twitter objects] (https://twittercommunity.com/t/api-payloads-to-include-original-quoted-tweet-objects/38184)
+   
+   ```java
     if(object!=null && StringUtils.isNotBlank(String.valueOf(object)) )
 		{
 	if(object.get("id")!=null && StringUtils.isNotBlank(String.valueOf(object.get("id")))    
@@ -109,6 +110,23 @@ else if(json.get("id")!=null && StringUtils.isNotBlank(String.valueOf(json.get("
 			
 			
 		}
-			 
-      ```
+			
+   
+   ```
+  
+  - Inside Driver we use **addCacheFile** to add our file in distributed cache.
+  ```java
+  	          try{
+
+			//adding file to distributed cache	
+			job.addCacheFile(new URI("hdfs://localhost:9000/cache/AFINN-111.txt"));
+		}catch(Exception e)
+		 {
+				System.out.println("file not added my dear");
+				System.exit(1);
+			}
+  ```
       
+
+  
+
