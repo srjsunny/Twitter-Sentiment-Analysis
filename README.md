@@ -23,7 +23,7 @@ Any flavor of linux with following installed
    /// your picture here.
    - Inside setup method will read AFINN list stored in **distributed cache** and store the words as key and there number as value.
   
-   ```
+   ``` java
 	JSONParser parsing  = null;
 	
 	Map<String,String> dictionary = null;
@@ -48,16 +48,15 @@ Any flavor of linux with following installed
 	        	dictionary.put(tokens[0], tokens[1]);
 	        }
 	
-	 }
-      
+ 	 }
+     ``` 
+     - Inside map method we will make use **quoted_text**
      
-     
-- Inside map method we will make use **quoted_text**
-     
-     ```
+     ``` java
     if(object!=null && StringUtils.isNotBlank(String.valueOf(object)) )
 		{
-			if(object.get("id")!=null && StringUtils.isNotBlank(String.valueOf(object.get("id")))    && object.get("text")!=null && StringUtils.isNotBlank(String.valueOf(object.get("text"))))
+	if(object.get("id")!=null && StringUtils.isNotBlank(String.valueOf(object.get("id")))    
+	&& object.get("text")!=null && StringUtils.isNotBlank(String.valueOf(object.get("text"))))
 			{
 				
 			 id = String.valueOf(object.get("id")).trim();
@@ -85,7 +84,8 @@ Any flavor of linux with following installed
 		
 		
 	   
-		else if(json.get("id")!=null && StringUtils.isNotBlank(String.valueOf(json.get("id"))) &&  json.get("text")!=null && StringUtils.isNoneBlank(String.valueOf(json.get("Text")))  )
+else if(json.get("id")!=null && StringUtils.isNotBlank(String.valueOf(json.get("id")))
+&&  json.get("text")!=null && StringUtils.isNoneBlank(String.valueOf(json.get("Text")))  )
 		{
 			id = String.valueOf(json.get("id")).trim();
 			
