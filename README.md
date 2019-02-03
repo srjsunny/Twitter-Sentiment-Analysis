@@ -51,7 +51,7 @@ Any flavor of linux with following installed
 	
  	 }
    ```
-   - Inside *map method* we first try to find  Twitters **quoted_status** object to get text and id inside  it, if not found we find it normally.   [Twitter objects] (https://twittercommunity.com/t/api-payloads-to-include-original-quoted-tweet-objects/38184)
+   - Inside *map method* we first try to find  Twitters **quoted_status** object to get text and id inside  it, if not found we find it normally.   [Twitter objects](https://twittercommunity.com/t/api-payloads-to-include-original-quoted-tweet-objects/38184)
    
    ```java
     if(object!=null && StringUtils.isNotBlank(String.valueOf(object)) )
