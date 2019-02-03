@@ -51,6 +51,7 @@ Any flavor of linux with following installed
 	
  	 }
    ```
+   </br>
    - Inside *map method* we first try to find  Twitters **quoted_status** object to get text and id inside  it, if not found we find it normally.   [Twitter objects](https://twittercommunity.com/t/api-payloads-to-include-original-quoted-tweet-objects/38184)
    
    ```java
@@ -105,6 +106,7 @@ else if(json.get("id")!=null && StringUtils.isNotBlank(String.valueOf(json.get("
 			
    
    ```
+   </br>
   
   - Inside Driver we use **addCacheFile** to add our file in distributed cache.
   ```java
@@ -118,7 +120,7 @@ else if(json.get("id")!=null && StringUtils.isNotBlank(String.valueOf(json.get("
 		 }
   ```
       
-### Execution:
+## Execution:
 - Exporting jars:
   - Export the project we have made as a jar file. 
     - Right click on project folder -> export -> as jar file.
@@ -137,14 +139,17 @@ else if(json.get("id")!=null && StringUtils.isNotBlank(String.valueOf(json.get("
    
    
 - Start the hadoop services
- `sbin/start-all.sh`
-
+ ```
+ sbin/start-all.sh
+```
 - Check services are running 
-`jps`
-- Submit the job.
-`bin/yarn jar <jar file location>  <Driver class name> <input-path>  <output-path> 
+```
+jps
+```
+- Submit the MapReduce job.
+```bin/yarn jar lt;jar file location ;gt  <Driver class name> <input-path>  <output-path> 
 
  bin/yarn  jar ../Desktop/sentiment.jar  Analyzer.Driver   /input  /output 
-   
-  
+ ```
+
 
