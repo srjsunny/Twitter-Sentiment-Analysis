@@ -36,7 +36,7 @@ Any flavor of linux with following installed
    - Add these external jars to you project. If you are using eclipse 
      - Right click on project -> build path -> configure build path -> libraries -> add external jars. 
    
-   - Inside *setup method* will read AFINN list stored in **distributed cache** and store the words as key and there number as value.We will make use of these values in *map method*
+   - Inside *setup method* we will read AFINN list stored in **distributed cache** and store the words as key and there number as value.We will make use of these values in *map method*
   
    ```java
    
@@ -59,7 +59,8 @@ Any flavor of linux with following installed
 	        BufferedReader reader = new BufferedReader(new InputStreamReader(fs.open(path)));
 	    
 	        while((line = reader.readLine())!=null)
-	        {       //splitting  lines in AFINN list which are tab delimited 
+	        {       
+		 //splitting  lines in AFINN list which are tab delimited 
 	        	String []tokens = line.split("\t");
 	        	dictionary.put(tokens[0], tokens[1]);
 	        }
@@ -190,8 +191,7 @@ bin/yarn  jar ../Desktop/sentimentAnalysis.jar  analyze.Driver   /input  /output
 ```mysql
 bin/hive -S
 ```
-- Create an external table *twitter* and load the data present in output folder into it. *Make sure there is only the required file in
-the output folder not anything else*
+- Create an external table *twitter* and load the data present in output folder into it. *Except part-m-00000 file which contains the output delete everything else present in the folder.*
 ```mysql
 CREATE EXTERNAL TABLE TWITTER
 (
