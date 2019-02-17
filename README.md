@@ -30,7 +30,7 @@ Any flavor of linux with following installed
   
   
 ### MR Code:
-   - We will use third party API like simple json-simple-1.1.1 API along with Apache's StringUtils API to parse the data. 
+   - We will use third party API like  json-simple-1.1.1 API along with Apache's StringUtils API to parse the data. 
       - [JSON Simple Example.](https://www.geeksforgeeks.org/parse-json-java/)
       - [StringUtils API](https://commons.apache.org/proper/commons-lang/apidocs/org/apache/commons/lang3/StringUtils.html#isNotBlank-java.lang.CharSequence-)
    - Add these external jars to you project. If you are using eclipse 
