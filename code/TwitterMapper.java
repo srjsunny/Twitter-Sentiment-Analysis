@@ -105,9 +105,6 @@ public class TwitterMapper extends Mapper<LongWritable,Text,NullWritable,Text> {
 						}
 					}
 				
-				
-				
-				
 				}
 			}
 			
@@ -131,11 +128,9 @@ public class TwitterMapper extends Mapper<LongWritable,Text,NullWritable,Text> {
 						sentiment_value+=Long.parseLong(dictionary.get(temp));
 						
 					}
-					
-					
+						
 				}
-				
-				
+					
 			}
 				
 		
@@ -147,24 +142,12 @@ public class TwitterMapper extends Mapper<LongWritable,Text,NullWritable,Text> {
 			
 		}
 			
-				
-				
-				
+								
 	    }catch(ParseException e)
 		{
 			e.printStackTrace();
 		}
-		
-		
-		
-		
-	
-		
-		
-		
-	}
-	
-	
-	
+			
+	}	
 	
 }
