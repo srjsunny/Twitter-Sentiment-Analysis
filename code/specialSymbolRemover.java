@@ -1,8 +1,6 @@
 package analyze;
 
 
-
-
 public class specialSymbolRemover {
 
 public static String remove(String s)
