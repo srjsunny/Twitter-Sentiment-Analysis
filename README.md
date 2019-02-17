@@ -5,7 +5,7 @@ The objective of this project is to perform Sentiment analysis on Twitter datase
  - [Prerequisite](#prerequisite)
  - [Steps](#steps)
  - [MR code](#mr-code)
- - [Execution](#execution)
+ - [MR Execution](#execution)
    - Exporting jars
    - Distributed cache
    - Starting hadoop services and checking
@@ -30,7 +30,7 @@ Any flavor of linux with following installed
   
   
 ### MR Code:
-   - We will use third party API like  json-simple-1.1.1 API along with Apache's StringUtils API to parse the data. 
+   - We will use third party APIs like  json-simple-1.1.1 API along with Apache's StringUtils API to parse the data. 
       - [JSON Simple Example.](https://www.geeksforgeeks.org/parse-json-java/)
       - [StringUtils API](https://commons.apache.org/proper/commons-lang/apidocs/org/apache/commons/lang3/StringUtils.html#isNotBlank-java.lang.CharSequence-)
    - Add these external jars to you project. If you are using eclipse 
@@ -164,7 +164,7 @@ Any flavor of linux with following installed
    bin/hdfs dfs -cat core-site.xml
    ```
    this will print the contents of the file core-site.xml which contains the configuration settings of Hadoop core.Here check the value of default fs(file system) this will give us the default hadoop url path.  In my case it's *hdfs://localhost:9000* , we use this path in driver program to add the folder */cache* containing  *AFINN-111.txt* into distributed cache 
-   //add picture here
+   ![](/images/localhost.PNG)
    
    
 - Start the hadoop services
@@ -176,7 +176,7 @@ Any flavor of linux with following installed
 jps
 ```
 
-////picture here.
+
 
 - Submit the MapReduce job.
 ```mysql
